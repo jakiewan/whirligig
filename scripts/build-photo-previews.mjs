@@ -8,7 +8,7 @@ let originalBytes=0,previewBytes=0;
 for(const [i,name] of names.entries()){
  const input=new URL('public/photos/'+encodeURIComponent(name),root);
  const output=new URL('public/photo-previews/'+String(i+1).padStart(2,'0')+'.webp',root);
- await sharp(await readFile(input)).rotate().resize({width:1280,height:1280,fit:'inside',withoutEnlargement:true}).webp({quality:80,effort:6}).toFile(output.pathname);
+ await sharp(await readFile(input)).rotate().resize({width:1080,height:1080,fit:'inside',withoutEnlargement:true}).avif({quality:55,effort:6,chromaSubsampling:'4:4:4'}).toFile(output.pathname);
  originalBytes+=(await stat(input)).size;previewBytes+=(await stat(output)).size;
 }
 console.log(JSON.stringify({images:names.length,originalBytes,previewBytes,reduction:1-previewBytes/originalBytes}));
