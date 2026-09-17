@@ -15,9 +15,9 @@ export function createPhotoLoader({anisotropy,onImage}) {
   function enqueue(e){e.state='queued';queue.push(e);update();queueMicrotask(pump);}
   function attempt(e){
     e.attempts++;const img=new Image();img.crossOrigin='anonymous';img.decoding='async';let settled=false;
-    const timeout=setTimeout(()=>finish(false),12000);
+    const timeout=setTimeout(()=>finish(false),45000);
     function finish(success){if(settled)return;settled=true;clearTimeout(timeout);img.onload=img.onerror=null;active--;
-      if(success){e.texture.image=img;e.texture.needsUpdate=true;e.state='loaded';for(const cb of e.callbacks)cb(e.texture);e.callbacks=[];onImage?.();}
+      if(success){e.texture.dispose();e.texture.image=img;e.texture.needsUpdate=true;e.state='loaded';for(const cb of e.callbacks)cb(e.texture);e.callbacks=[];onImage?.();}
       else if(e.attempts<3){e.state='waiting';setTimeout(()=>enqueue(e),500*e.attempts);}
       else e.state='failed';update();pump();
     }
