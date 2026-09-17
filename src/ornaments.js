@@ -62,7 +62,7 @@ export function refineModel(root,materials){
  // 底盘上的立体花叶装饰。
  for(let i=0;i<10;i++){const a=i*Math.PI/5+.18,x=Math.sin(a)*1.76,z=Math.cos(a)*1.76;for(let j=0;j<5;j++){const b=j*Math.PI*2/5;const petal=sphere([x+Math.sin(b)*.075,.69,z+Math.cos(b)*.075],[.064,.019,.034],i%2?ivory:red);petal.rotation.y=-b;}sphere([x,.715,z],[.028,.025,.028],gold);for(const side of [-1,1]){const leaf=sphere([x+side*.14,.67,z+.055],[.115,.018,.04],green);leaf.rotation.y=side*.65;}}
  // 参考中底盘明显小于冠顶。
- for(const o of root.children){if(o.position.y<.72&&o.type!=='PointLight'){o.position.x*=.79;o.position.z*=.79;o.scale.x*=.79;o.scale.z*=.79;}}
+ for(const o of root.children){if(o.position.y<.72&&o.type!=='PointLight'){o.position.x*=.79;o.position.z*=.79;o.scale.x*=.79;if(o.geometry?.type==='TorusGeometry')o.scale.y*=.79;else o.scale.z*=.79;}}
  horses.forEach(h=>{h.position.x*=.86;h.position.z*=.86;h.scale.setScalar(.93)});
  return {horses,materials:[...painted,red,blue,green,ochre]};
 }
