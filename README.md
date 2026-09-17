@@ -14,6 +14,8 @@ Three.js 制作的照片旋转木马，支持拖动旋转、缩放、点击照�
 
 ## 开发与发布
 
+首次打开只加载最长边1280像素的 WebP 展示图；点击“查看原图”才下载原尺寸图片。原始 JPEG/PNG 与 HEIC 的原尺寸 JPEG 副本仍位于 `public/photos/`。修改照片后可运行 `node scripts/build-photo-previews.mjs` 重新生成展示图。
+
 需要 Node.js 22 或更新版本。
 
 ```bash
